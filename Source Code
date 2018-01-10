@@ -1,0 +1,66 @@
+# Dynamic programming implementation of Longest Common Subsequence Problem
+
+#Question Statement
+"""For this assignment you will implement a dynamic programming algorithm to solve the Longest Common Subsequence (LSC) problem.
+
+The input to your program will be:
+Two DNA sequences
+
+The output of your program will be:
+The LCS of the input sequences.
+The LCS of strings S1 and S2 is a third string S3 in which the bases of S3 appear in each of S1 and S2.
+These bases must appear in the same order but not necessarily consecutively.
+
+Example:
+Input:
+S1 = ACCGGTCGAGTGCGCGGAAGCCGGCCGAA
+S2 = GTCGTTCGGAATGCCGTTGCTCTGTAAA
+
+Output:
+S3 = GTCGTCGGAAGCCGGCCGAA        """
+
+#Code  -  Python 3.6.1v, compiled and executed @ Thonny 2.1.11v
+
+def LongestCommonSubsequence(S1, S2, m, n):
+        #Initatiazing the array A
+	A = [[0 for S1 in range(n+1)] for S1 in range(m+1)]
+	
+	# S1[0 to i-1] & S2[0 to j-1] are the arrays and A[i][j] stores the length of the Longest Common Subsequence of both the arrays
+	for i in range(m+1):
+		for j in range(n+1):
+			if i == 0 or j == 0:
+				A[i][j] = 0
+			elif S1[i-1] == S2[j-1]:
+				A[i][j] = A[i-1][j-1] + 1
+			else:
+				A[i][j] = max(A[i-1][j], A[i][j-1])
+
+	# To get the index values for the LCS
+	index = A[m][n]
+	# Creating a character array for storing the entire LCS string
+	LongestCommonSubsequence = [""] * (index+1)
+	LongestCommonSubsequence[index] = "\0"
+
+	# Matrix Calculation
+	i = m
+	j = n
+	while i > 0 and j > 0:
+
+		# If both the arrays are same then current character is part of LCS
+		
+		if S1[i-1] == S2[j-1]:
+			LongestCommonSubsequence[index-1] = S1[i-1]
+			#Decrementing all the indexes
+			i-=1
+			j-=1
+			index-=1
+
+		# Else go with the side of the larger value
+		elif A[i-1][j] > A[i][j-1]:
+			i-=1
+		else:
+			j-=1
+
+	print ("\nInput:\nString 1: " + S1 + " \nString 2: " + S2 + " \n\nOutput:\nString 3: " + "".join(LongestCommonSubsequence))
+
+#End of Program
