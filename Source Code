@@ -63,4 +63,24 @@ def LongestCommonSubsequence(S1, S2, m, n):
 
 	print ("\nInput:\nString 1: " + S1 + " \nString 2: " + S2 + " \n\nOutput:\nString 3: " + "".join(LongestCommonSubsequence))
 
+# Import the function from the other file
+from LongestCommonSubsequence_1_1 import *
+# Condition statement
+while True:
+    S1 = input ( "Enter the first string: " )
+    S2 = input ( "Enter the second string: " )
+    #To check whether the any of the string is empty or not.
+    if S1 == "" or S2 == "":
+        print ( "\nEmpty String" )
+        
+    else:    
+        m = len(S1)
+        n = len(S2)
+        LongestCommonSubsequence(S1, S2, m, n)    
+    a = input( "\nEnter Y to continue and N to Quit: " )
+    a = a.lower()
+    if a == "n":
+        print ( "\nThank You" )
+        break
+        
 #End of Program
